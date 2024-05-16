@@ -1,5 +1,7 @@
-/** ------------------------------------------------ **/// Styles
+/** ------------------------------------------------ **/
+// Styles
 import "@styles/global.css"
+import { display } from '@styles/fonts'
 
 /** ------------------------------------------------ **
  * Root Layout 
@@ -11,7 +13,7 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<html lang="en">
+		<html lang="en" className={`${display.variable}`}>
 			<body>
 				{children}
 			</body>

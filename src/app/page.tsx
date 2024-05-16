@@ -2,5 +2,5 @@
  * Homepage **REQUIRED**
  ** ------------------------------------------------ **/
 export default function Page() {
-	return <h1>Hello, world</h1>
+	return <h1 className="font-display">Hello, world</h1>
 }
