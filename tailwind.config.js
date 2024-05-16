@@ -4,6 +4,7 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
+				copy: ["var(--font-copy)"],
 				display: ["var(--font-display)"],
 			},
 		},
