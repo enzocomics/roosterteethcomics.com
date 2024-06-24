@@ -10,7 +10,6 @@ export default function Page() {
 	const comics = fs.readdirSync(path)
 	const lastComic = comics[comics.length - 1]
 
-	//console.log(comics[comics.length - 1])
 	return <>
 		<Comic slug={lastComic} />
 
