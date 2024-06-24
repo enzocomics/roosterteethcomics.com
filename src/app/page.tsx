@@ -5,11 +5,14 @@ import fs from "fs"
  * Homepage **REQUIRED**
  ** ------------------------------------------------ **/
 export default function Page() {
+	// Get the paths of the comics folder
 	const path = "public/comic/img"
 	const comics = fs.readdirSync(path)
-	console.log(comics[0])
+	const lastComic = comics[comics.length - 1]
+
+	//console.log(comics[comics.length - 1])
 	return <>
-		<Comic slug={comics[0]} />
+		<Comic slug={lastComic} />
 
 	</>
 }
