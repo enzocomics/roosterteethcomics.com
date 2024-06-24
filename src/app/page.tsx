@@ -1,14 +1,15 @@
 import Comic from "@ui/comic-component"
-
 import fs from "fs"
+
 /** ------------------------------------------------ **
  * Homepage **REQUIRED**
  ** ------------------------------------------------ **/
 export default function Page() {
 	const path = "public/comic/img"
-	console.log(fs.readdirSync(path))
+	const comics = fs.readdirSync(path)
+	console.log(comics[0])
 	return <>
-		<Comic />
+		<Comic slug={comics[0]} />
 
 	</>
 }

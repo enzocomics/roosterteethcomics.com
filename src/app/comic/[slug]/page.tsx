@@ -18,8 +18,7 @@ export default function Page({
 	// - Throw 404 if it doesn't find a comic
 
 	return <>
-		<Comic />
-		<h1>{params.slug}</h1>
+		<Comic slug={params.slug} />
 	</>
 }
 
