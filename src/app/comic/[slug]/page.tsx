@@ -4,6 +4,11 @@ import fs from "fs"
 const path = "public/comic/img"
 const comics = fs.readdirSync(path)
 
+// Loop through the comics and change the paths to just the names
+for (const comic in comics) {
+
+}
+
 /** ------------------------------------------------ **
  * Comic Route
  ** ------------------------------------------------ **/
