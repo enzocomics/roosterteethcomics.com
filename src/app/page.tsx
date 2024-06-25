@@ -11,7 +11,6 @@ export default function Page() {
 	const lastComic = comics[comics.length - 1]
 
 	return <>
-		<Comic slug={lastComic} />
-
+		<Comic slug="latest" />
 	</>
 }
