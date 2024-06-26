@@ -21,13 +21,12 @@ export default function Comic({
 	// Find the index of the current comic
 	let comicIndex = comics.findIndex(comic => comic.includes(slug))
 
+	// The homepage won't have a slug, so just display the latest comic
 	let thisComic
 	if (slug == "latest")
 		thisComic = comics[comics.length - 1]
 	else
 		thisComic = comics[comicIndex]
-
-	console.log(comics, thisComic)
 
 	// Extract the date from the string
 	const comicDate = thisComic.substring(0, 10)
