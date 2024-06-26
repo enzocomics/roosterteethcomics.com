@@ -29,7 +29,7 @@ export function generateStaticParams() {
 	const path = "public/comic/img"
 	const comics = fs.readdirSync(path)
 
-	// Loop through the comics and change the paths to just the names
+	// Loop through the aray and change the paths to just the names
 	comics.forEach((comic, index) => {
 		// Format the title - remove the date, the filename, and hyphens
 		let title
@@ -39,11 +39,8 @@ export function generateStaticParams() {
 		comics[index] = title
 	})
 
-
-	// Generate a static segment for every comic image
-	return comics.map((filename) => ({
-		// Remove the file extension
-		slug: filename
-		//slug: filename.replace(/(\.[^/.]+)+$/, "")
+	// Generate a static segment for every comic 
+	return comics.map((title) => ({
+		slug: title
 	}))
 }
