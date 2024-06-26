@@ -16,28 +16,9 @@ export default function Comic({
 	// Get a list of all the comics in the comic images folder
 	const path = "public/comic/img"
 	const comics = fs.readdirSync(path)
-	let comicIndex = 0
 
-	// Loop through the comics and retrieve the index of the CURRENT comic
-	comics.every((comic, index) => {
-		let title
-		title = comic.replace(/\d{2,4}[\-]\d{1,2}[\-]\d{1,2}[\-]/g, "")
-		title = comic.replace(".jpg", "")
-		//title = title.replace("-", "")
-
-		console.log(title, slug, index)
-		if (title == slug) {
-			comicIndex = index
-			console.log("YES", index)
-			return false
-		} else {
-			return true
-		}
-	})
-	//console.log(comics[comicIndex])
-
-	// Get the current slug
-	// Loop through the list and compare the current slug to the list of slugs
+	// Find the index of the current comic
+	let comicIndex = comics.findIndex(comic => comic.includes(slug))
 
 	let thisComic
 	if (slug == "latest")
