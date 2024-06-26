@@ -2,6 +2,7 @@ import fs from "fs"
 
 // Import Date
 import dayjs from "dayjs"
+import Image from "next/image"
 var customParseFormat = require("dayjs/plugin/customParseFormat")
 dayjs.extend(customParseFormat)
 /** ------------------------------------------------ **
@@ -26,13 +27,14 @@ export default function Comic({
 	else
 		thisComic = comics[comicIndex]
 
+	console.log(comics, thisComic)
+
 	// Extract the date from the string
 	const comicDate = thisComic.substring(0, 10)
 	const comicDateFormatted = dayjs(comicDate).format("MMMM D, YYYY")
 
 	return <>
-		<h2>{comics[comicIndex]}</h2>
 		<h1 className="text-center pb-8">{comicDateFormatted}</h1>
-		<p className="font-copy">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<Image src={`/comic/img/${thisComic}`} alt="" width="600" height="1000" className="mx-auto" />
 	</>
 }
