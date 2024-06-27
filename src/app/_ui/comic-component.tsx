@@ -35,7 +35,7 @@ export default function Comic({
 	const comicDateFormatted = dayjs(comicDate).format("MMMM D, YYYY")
 
 	return <>
-		<h1 className="text-center pb-8">{comicDateFormatted}</h1>
+		<h1 className="text-center mb-8">{comicDateFormatted}</h1>
 
 		<ComicNav slug={slug} />
 
@@ -51,7 +51,7 @@ function ComicNav({
 	slug: string
 }) {
 	return <>
-		<nav className="grid grid-flow-col text-center font-display text-3xl">
+		<nav className="grid grid-flow-col w-[500px] mx-auto my-6 text-center font-display text-3xl">
 			<ComicLink href="#">&laquo; First</ComicLink>
 			<ComicLink href="#">&lt; Prev</ComicLink>
 			<ComicLink href="#">Random</ComicLink>
@@ -69,6 +69,6 @@ function ComicLink({
 	href: URL | "#"
 }) {
 	return <>
-		<Link href={href}>{children}</Link>
+		<Link href={href} className="hover:text-red-900">{children}</Link>
 	</>
 }
