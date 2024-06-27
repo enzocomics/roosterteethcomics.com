@@ -51,7 +51,7 @@ export default function Comic({
 
 		<ComicNav slug={slug} prevComic={prevComic} nextComic={nextComic} />
 
-		<Image src={`/comic/img/${thisComic}`} alt="" width="600" height="1000" className="mx-auto" />
+		<Image src={`/comic/img/${thisComic}`} alt="" width="1000" height="1000" className="mx-auto" />
 
 		<ComicNav slug={slug} />
 	</>
