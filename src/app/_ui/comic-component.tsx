@@ -19,7 +19,6 @@ export default function Comic({
 ) {
 	// Retrieve the current Comic
 	const thisComic = GetComicBySlug(slug)
-
 	// Extract the date from the string
 	const comicDate = thisComic.substring(0, 10)
 	const comicDateFormatted = dayjs(comicDate).format("MMMM D, YYYY")
@@ -29,7 +28,7 @@ export default function Comic({
 
 		<ComicNav slug={slug} />
 
-		<Image src={`/comic/img/${thisComic}`} alt="" width="1000" height="1000" className="mx-auto" />
+		<Image src={`/comic/img/${thisComic}`} alt="" width="9999" height="9999" className="mx-auto max-w-full" />
 
 		<ComicNav slug={slug} />
 	</>
