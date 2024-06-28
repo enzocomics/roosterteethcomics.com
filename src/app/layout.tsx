@@ -16,8 +16,8 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en" className={`${copy.variable} ${display.variable}`}>
-			<body>
-				<header className="p-5 bg-red-900 text-neutral-200 text-center text-sm">
+			<body className="bg-[#f5f5f5]">
+				<header className="p-5 bg-[#b73d3d] text-neutral-200 text-center text-sm">
 					<Link className="max-w-4xl mx-auto" href="/">
 						<Image className="pb-5 mx-auto" src="/img/logo.png" alt="" width="716" height="80" />
 						<p>&copy; Rooster Teeth Productions, LLC   |   Written by Griffon Ramsey, Illustrated by Luke McKay, and Edited by Geoff Ramsey<br />
