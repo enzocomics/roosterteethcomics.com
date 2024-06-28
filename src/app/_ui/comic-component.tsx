@@ -7,6 +7,7 @@ import Link from "next/link"
 import { ReactNode } from "react"
 var customParseFormat = require("dayjs/plugin/customParseFormat")
 dayjs.extend(customParseFormat)
+
 /** ------------------------------------------------ **
  * Comic Component
  ** ------------------------------------------------ **/
@@ -16,6 +17,54 @@ export default function Comic({
 	slug: string
 }
 ) {
+	// Retrieve the current Comic
+	const thisComic = GetComicBySlug(slug)
+
+	// Extract the date from the string
+	const comicDate = thisComic.substring(0, 10)
+	const comicDateFormatted = dayjs(comicDate).format("MMMM D, YYYY")
+
+	return <>
+		<h1 className="text-center mb-8">{comicDateFormatted}</h1>
+
+		<ComicNav slug={slug} />
+
+		<Image src={`/comic/img/${thisComic}`} alt="" width="1000" height="1000" className="mx-auto" />
+
+		<ComicNav slug={slug} />
+	</>
+}
+
+/** ------------------------------------------------ **
+ * Retrieve a Comic by its Slug
+ ** ------------------------------------------------ **/
+function GetComicBySlug(slug: string) {
+	// Get a list of all the comics in the comic images folder
+	const path = "public/comic/img"
+	const comics = fs.readdirSync(path)
+
+	// Find the index of the comic that matches the provided slug
+	let comicIndex
+	comicIndex = comics.findIndex(comic => comic.includes(slug))
+
+	// The homepage won't have a slug, so just display the latest comic
+	let fetchedComic
+	if (slug == "latest")
+		fetchedComic = comics[comics.length - 1]
+	else
+		fetchedComic = comics[comicIndex]
+
+	return fetchedComic
+}
+
+/** ------------------------------------------------ **
+ * Comic Navigation Component
+ ** ------------------------------------------------ **/
+function ComicNav({
+	slug,
+}: {
+	slug: string
+}) {
 	// Get a list of all the comics in the comic images folder
 	const path = "public/comic/img"
 	const comics = fs.readdirSync(path)
@@ -24,59 +73,36 @@ export default function Comic({
 	let comicIndex
 	comicIndex = comics.findIndex(comic => comic.includes(slug))
 
-	// The homepage won't have a slug, so just display the latest comic
-	let thisComic
-	if (slug == "latest")
-		thisComic = comics[comics.length - 1]
-	else
-		thisComic = comics[comicIndex]
-
-	// Extract the date from the string
-	const comicDate = thisComic.substring(0, 10)
-	const comicDateFormatted = dayjs(comicDate).format("MMMM D, YYYY")
+	// Loop through the list of comics and reformat the titles to remove the date & filename
+	comics.forEach((comic, index) => {
+		let title
+		title = comic.replace(/\d{2,4}[\-]\d{1,2}[\-]\d{1,2}[\-]/g, "")
+		title = title.replace(".jpg", "")
+		comics[index] = title
+	})
 
 	// Find the indices of the previous and next comic, based on the current comic's Index
 	const prevComic = comics[comicIndex - 1]
 	const nextComic = comics[comicIndex + 1]
 
-	console.log('---')
-	console.log(prevComic, comicIndex - 1)
-	console.log(thisComic, comicIndex)
-	console.log(nextComic, comicIndex + 1)
+	// The first & last comic buttons grey out if the current comic is first/last
+	const firstComic = prevComic === undefined ? undefined : comics[0]
+	const lastComic = nextComic === undefined ? undefined : comics[comics.length - 1]
 
-
-
-	return <>
-		<h1 className="text-center mb-8">{comicDateFormatted}</h1>
-
-		<ComicNav slug={slug} prevComic={prevComic} nextComic={nextComic} />
-
-		<Image src={`/comic/img/${thisComic}`} alt="" width="1000" height="1000" className="mx-auto" />
-
-		<ComicNav slug={slug} />
-	</>
-}
-
-function ComicNav({
-	prevComic,
-	nextComic,
-	slug,
-}: {
-	prevComic?: string
-	nextComic?: string
-	slug: string
-}) {
 	return <>
 		<nav className="grid grid-flow-col w-[500px] mx-auto my-6 text-center font-display text-3xl">
-			<ComicLink href="#">&laquo; First</ComicLink>
+			<ComicLink href={firstComic}>&laquo; First</ComicLink>
 			<ComicLink href={prevComic}>&lt; Prev</ComicLink>
 			<ComicLink href="#">Random</ComicLink>
 			<ComicLink href={nextComic}>Next &gt;</ComicLink>
-			<ComicLink href="#">Last &raquo;</ComicLink>
+			<ComicLink href={lastComic}>Last &raquo;</ComicLink>
 		</nav>
 	</>
 }
 
+/** ------------------------------------------------ **
+ * Comic Navigation Link Component
+ ** ------------------------------------------------ **/
 function ComicLink({
 	children,
 	href
