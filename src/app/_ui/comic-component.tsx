@@ -81,6 +81,7 @@ function ComicNav({
 		let title
 		title = comic.replace(/\d{2,4}[\-]\d{1,2}[\-]\d{1,2}[\-]/g, "")
 		title = title.replace(".jpg", "")
+		title = title.replace(".png", "")
 		comics[index] = title
 	})
 
