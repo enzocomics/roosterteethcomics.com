@@ -29,7 +29,7 @@ export function generateStaticParams() {
 	const path = "public/comic/img"
 	const comics = fs.readdirSync(path)
 
-	// Loop through the aray and change the paths to just the names
+	// Loop through the array and change the paths to just the names
 	comics.forEach((comic, index) => {
 		// Format the title - remove the date, the filename, and hyphens
 		let title
