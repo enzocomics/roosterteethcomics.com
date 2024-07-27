@@ -112,6 +112,6 @@ function ComicLink({
 	if (href === undefined) {
 		return <span className="opacity-50">{children}</span>
 	} else {
-		return <Link href={href} className="hover:text-red-900">{children}</Link>
+		return <Link href={"/comic/" + href} className="hover:text-red-900">{children}</Link>
 	}
 }
