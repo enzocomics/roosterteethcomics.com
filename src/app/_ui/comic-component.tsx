@@ -69,8 +69,12 @@ function ComicNav({
 	const comics = fs.readdirSync(path)
 
 	// Find the index of the current comic
+	// The homepage wont' have a slug, so just get the last comic
 	let comicIndex
-	comicIndex = comics.findIndex(comic => comic.includes(slug))
+	if (slug == "latest")
+		comicIndex = comics.length - 1
+	else
+		comicIndex = comics.findIndex(comic => comic.includes(slug))
 
 	// Loop through the list of comics and reformat the titles to remove the date & filename
 	comics.forEach((comic, index) => {
@@ -81,8 +85,8 @@ function ComicNav({
 	})
 
 	// Find the indices of the previous and next comic, based on the current comic's Index
-	const prevComic = comics[comicIndex - 1]
-	const nextComic = comics[comicIndex + 1]
+	const prevComic = comicIndex === undefined ? undefined : comics[comicIndex - 1]
+	const nextComic = comicIndex === undefined ? undefined : comics[comicIndex + 1]
 
 	// The first & last comic buttons grey out if the current comic is first/last
 	const firstComic = prevComic === undefined ? undefined : comics[0]
