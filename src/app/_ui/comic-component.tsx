@@ -78,11 +78,13 @@ function ComicNav({
 	const firstComic = pageNum == 1 ? undefined : (1).toString()
 	const lastComic = pageNum == comics.length - 1 ? undefined : (comics.length - 1).toString()
 
+	const randomComic = (Math.floor(Math.random() * comics.length)).toString()
+
 	return <>
 		<nav className="grid grid-flow-col w-[500px] mx-auto my-6 text-center font-display text-3xl">
 			<ComicLink href={firstComic}>&laquo; First</ComicLink>
 			<ComicLink href={prevComic}>&lt; Prev</ComicLink>
-			<ComicLink href="#">Random</ComicLink>
+			<ComicLink href={randomComic}>Random</ComicLink>
 			<ComicLink href={nextComic}>Next &gt;</ComicLink>
 			<ComicLink href={lastComic}>Last &raquo;</ComicLink>
 		</nav>
