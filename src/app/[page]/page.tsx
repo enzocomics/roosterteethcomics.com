@@ -7,7 +7,7 @@ import fs from "fs"
 export default function Page({
 	params
 }: {
-	params: { slug: string }
+	params: { page: number }
 }) {
 
 	// TODO: Check if the current page url is correct
@@ -15,7 +15,7 @@ export default function Page({
 	// - Throw 404 if it doesn't find a comic
 
 	return <>
-		<Comic slug={params.slug} />
+		<Comic page={params.page} />
 	</>
 }
 
@@ -30,18 +30,18 @@ export function generateStaticParams() {
 	const comics = fs.readdirSync(path)
 
 	// Loop through the array and change the paths to just the names
-	comics.forEach((comic, index) => {
-		// Format the title - remove the date, the filename, and hyphens
-		let title
-		title = comic.replace(/\d{2,4}[\-]\d{1,2}[\-]\d{1,2}[\-]/g, "")
-		title = title.replace(".jpg", "")
-		title = title.replace(".png", "")
-		//title = title.replace("-", "")
-		comics[index] = title
-	})
+	// comics.forEach((comic, index) => {
+	// 	// Format the title - remove the date, the filename, and hyphens
+	// 	// let title
+	// 	// title = comic.replace(/\d{2,4}[\-]\d{1,2}[\-]\d{1,2}[\-]/g, "")
+	// 	// title = title.replace(".jpg", "")
+	// 	// title = title.replace(".png", "")
+	// 	//title = title.replace("-", "")
+	// 	comics[index] = title
+	// })
 
 	// Generate a static segment for every comic 
-	return comics.map((title) => ({
-		slug: title
+	return comics.map((index) => ({
+		page: index
 	}))
 }

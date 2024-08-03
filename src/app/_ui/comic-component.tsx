@@ -12,13 +12,17 @@ dayjs.extend(customParseFormat)
  * Comic Component
  ** ------------------------------------------------ **/
 export default function Comic({
-	slug,
+	page,
 }: {
-	slug: string
+	page?: number
 }
 ) {
+	// Get a list of all the comics in the comic images folder
+	const path = "public/comic/img"
+	const comics = fs.readdirSync(path)
 	// Retrieve the current Comic
-	const thisComic = GetComicBySlug(slug)
+	const thisComic = page === undefined ? comics[comics.length - 1] : comics[page]
+
 	// Extract the date from the string
 	const comicDate = thisComic.substring(0, 10)
 	const comicDateFormatted = dayjs(comicDate).format("MMMM D, YYYY")
@@ -26,32 +30,28 @@ export default function Comic({
 	return <>
 		<h1 className="text-center mb-8">{comicDateFormatted}</h1>
 
-		<ComicNav slug={slug} />
+		<ComicNav page={page} />
 
 		<Image src={`/comic/img/${thisComic}`} alt="" width="9999" height="9999" className="mx-auto max-w-full" />
 
-		<ComicNav slug={slug} />
+		{/* <ComicNav slug={slug} /> */}
+		<ComicNav page={page} />
 	</>
 }
 
 /** ------------------------------------------------ **
- * Retrieve a Comic by its Slug
+ * Retrieve a Comic by its Page Number/Index
  ** ------------------------------------------------ **/
-function GetComicBySlug(slug: string) {
+function GetComicByIndex(index?: number) {
 	// Get a list of all the comics in the comic images folder
 	const path = "public/comic/img"
 	const comics = fs.readdirSync(path)
 
-	// Find the index of the comic that matches the provided slug
-	let comicIndex
-	comicIndex = comics.findIndex(comic => comic.includes(slug))
-
-	// The homepage won't have a slug, so just display the latest comic
 	let fetchedComic
-	if (slug == "latest")
+	if (index == undefined)
 		fetchedComic = comics[comics.length - 1]
 	else
-		fetchedComic = comics[comicIndex]
+		fetchedComic = comics[index - 1]
 
 	return fetchedComic
 }
@@ -60,38 +60,23 @@ function GetComicBySlug(slug: string) {
  * Comic Navigation Component
  ** ------------------------------------------------ **/
 function ComicNav({
-	slug,
+	page,
 }: {
-	slug: string
+	page?: number
 }) {
+
 	// Get a list of all the comics in the comic images folder
 	const path = "public/comic/img"
 	const comics = fs.readdirSync(path)
 
-	// Find the index of the current comic
-	// The homepage wont' have a slug, so just get the last comic
-	let comicIndex
-	if (slug == "latest")
-		comicIndex = comics.length - 1
-	else
-		comicIndex = comics.findIndex(comic => comic.includes(slug))
+	// If no page is specified, default to the latest page
+	let pageNum = page == undefined ? comics.length - 1 : page
 
-	// Loop through the list of comics and reformat the titles to remove the date & filename
-	comics.forEach((comic, index) => {
-		let title
-		title = comic.replace(/\d{2,4}[\-]\d{1,2}[\-]\d{1,2}[\-]/g, "")
-		title = title.replace(".jpg", "")
-		title = title.replace(".png", "")
-		comics[index] = title
-	})
-
-	// Find the indices of the previous and next comic, based on the current comic's Index
-	const prevComic = comicIndex === undefined ? undefined : comics[comicIndex - 1]
-	const nextComic = comicIndex === undefined ? undefined : comics[comicIndex + 1]
-
-	// The first & last comic buttons grey out if the current comic is first/last
-	const firstComic = prevComic === undefined ? undefined : comics[0]
-	const lastComic = nextComic === undefined ? undefined : comics[comics.length - 1]
+	// Grey out the buttons if they are at the first/last
+	const prevComic = pageNum == 1 ? undefined : (pageNum - 1).toString()
+	const nextComic = pageNum == comics.length - 1 ? undefined : (Number(pageNum) + 1).toString()
+	const firstComic = pageNum == 1 ? undefined : (1).toString()
+	const lastComic = pageNum == comics.length - 1 ? undefined : (comics.length - 1).toString()
 
 	return <>
 		<nav className="grid grid-flow-col w-[500px] mx-auto my-6 text-center font-display text-3xl">
@@ -117,6 +102,6 @@ function ComicLink({
 	if (href === undefined) {
 		return <span className="opacity-50">{children}</span>
 	} else {
-		return <Link href={"/comic/" + href} className="hover:text-red-900">{children}</Link>
+		return <Link href={href} className="hover:text-red-900">{children}</Link>
 	}
 }
