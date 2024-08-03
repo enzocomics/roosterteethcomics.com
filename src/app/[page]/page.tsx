@@ -41,7 +41,8 @@ export function generateStaticParams() {
 	// })
 
 	// Generate a static segment for every comic 
-	return comics.map((index) => ({
-		page: index
+	return comics.map((title, index) => ({
+		page: (index + 1).toString()
 	}))
+
 }
