@@ -28,23 +28,23 @@ export default function RootLayout({
 					{children}
 				</main>
 				<footer className="grid grid-cols-5 gap-1 justify-center max-w-4xl mx-auto mb-12 text-center">
-					<Link className="group/book" href="/comic/free-license">
+					<Link className="group/book" href="/2">
 						<Image className="group-hover/book:opacity-75 transition-opacity group-hover/book:duration-0 duration-700" src="/img/cover1.png" width="200" height="400" alt="" />
 						<div className="group-hover/book:text-black my-2 font-bold text-[#b73d3d] uppercase">Year 1</div>
 					</Link>
-					<Link className="group/book" href="/comic/hot-tempered">
+					<Link className="group/book" href="/156">
 						<Image className="group-hover/book:opacity-75 transition-opacity group-hover/book:duration-0 duration-700" src="/img/cover2.png" width="200" height="400" alt="" />
 						<div className="group-hover/book:text-black my-2 font-bold text-[#b73d3d] uppercase">Year 2</div>
 					</Link>
-					<Link className="group/book" href="/comic/double-vision">
+					<Link className="group/book" href="/311">
 						<Image className="group-hover/book:opacity-75 transition-opacity group-hover/book:duration-0 duration-700" src="/img/cover3.png" width="200" height="400" alt="" />
 						<div className="group-hover/book:text-black my-2 font-bold text-[#b73d3d] uppercase">Year 3</div>
 					</Link>
-					<Link className="group/book" href="/comic/ready-set-go">
+					<Link className="group/book" href="/466">
 						<Image className="group-hover/book:opacity-75 transition-opacity group-hover/book:duration-0 duration-700" src="/img/cover4.png" width="200" height="400" alt="" />
 						<div className="group-hover/book:text-black my-2 font-bold text-[#b73d3d] uppercase">Year 4</div>
 					</Link>
-					<Link className="group/book" href="/comic/evilangelical">
+					<Link className="group/book" href="/621">
 						<Image className="group-hover/book:opacity-75 transition-opacity group-hover/book:duration-0 duration-700" src="/img/cover5.png" width="200" height="400" alt="" />
 						<div className="group-hover/book:text-black my-2 font-bold text-[#b73d3d] uppercase">Year 5</div>
 					</Link>
