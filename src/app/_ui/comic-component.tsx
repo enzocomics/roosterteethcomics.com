@@ -21,7 +21,7 @@ export default function Comic({
 	const path = "public/comic/img"
 	const comics = fs.readdirSync(path)
 	// Retrieve the current Comic
-	const thisComic = page === undefined ? comics[comics.length - 1] : comics[page]
+	const thisComic = page === undefined ? comics[comics.length - 1] : comics[page - 1]
 
 	// Extract the date from the string
 	const comicDate = thisComic.substring(0, 10)
@@ -70,13 +70,13 @@ function ComicNav({
 	const comics = fs.readdirSync(path)
 
 	// If no page is specified, default to the latest page
-	let pageNum = page == undefined ? comics.length - 1 : page
+	let pageNum = page == undefined ? comics.length : page
 
 	// Grey out the buttons if they are at the first/last
 	const prevComic = pageNum == 1 ? undefined : (pageNum - 1).toString()
-	const nextComic = pageNum == comics.length - 1 ? undefined : (Number(pageNum) + 1).toString()
+	const nextComic = pageNum == comics.length ? undefined : (Number(pageNum) + 1).toString()
 	const firstComic = pageNum == 1 ? undefined : (1).toString()
-	const lastComic = pageNum == comics.length - 1 ? undefined : (comics.length - 1).toString()
+	const lastComic = pageNum == comics.length ? undefined : (comics.length).toString()
 
 	const randomComic = (Math.floor(Math.random() * comics.length)).toString()
 
