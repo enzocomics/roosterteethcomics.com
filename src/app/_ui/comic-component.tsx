@@ -36,9 +36,9 @@ export default function Comic({
 
 	// Output
 	return <>
-		<h1 className="text-center mb-8">{comicDateFormatted}</h1>
+		<h1 className="text-center mb-3 text-sm md:text-base">{comicDateFormatted}</h1>
 		<ComicNav index={comicIndex} />
-		<Image src={`/comic/img/${thisComic}`} alt="" width="9999" height="9999" className="mx-auto max-w-full" />
+		<Image src={`/comic/img/${thisComic}`} alt="" width="9999" height="9999" className="mx-auto max-w-full mb-3" />
 		<ComicNav index={comicIndex} />
 	</>
 }
@@ -82,7 +82,7 @@ function ComicNav({
 	// Random comic button
 
 	return <>
-		<nav className="grid grid-flow-col w-[500px] mx-auto my-6 text-center font-display text-3xl">
+		<nav className="grid grid-flow-col justify-center gap-2 md:gap-5 max-w-[500px] mx-auto my-0 text-center font-display text-xl sm:text-3xl">
 			<ComicLink href={firstComic}>&laquo; First</ComicLink>
 			<ComicLink href={prevComic}>&lt; Prev</ComicLink>
 			<RandomComicButton comics={comics}>Random</RandomComicButton>
