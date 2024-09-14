@@ -28,23 +28,23 @@ export default function RootLayout({
 					{children}
 				</main>
 				<footer className="grid grid-cols-5 gap-1 justify-center max-w-4xl mx-auto mb-12 text-center">
-					<Link className="group/book" href="/2">
+					<Link className="group/book" href="/2006/08/22">
 						<Image className="group-hover/book:opacity-75 transition-opacity group-hover/book:duration-0 duration-700" src="/img/cover1.png" width="200" height="400" alt="" />
 						<div className="group-hover/book:text-black my-2 font-bold text-[#b73d3d] uppercase">Year 1</div>
 					</Link>
-					<Link className="group/book" href="/156">
+					<Link className="group/book" href="/2007/08/18">
 						<Image className="group-hover/book:opacity-75 transition-opacity group-hover/book:duration-0 duration-700" src="/img/cover2.png" width="200" height="400" alt="" />
 						<div className="group-hover/book:text-black my-2 font-bold text-[#b73d3d] uppercase">Year 2</div>
 					</Link>
-					<Link className="group/book" href="/311">
+					<Link className="group/book" href="/2008/08/16">
 						<Image className="group-hover/book:opacity-75 transition-opacity group-hover/book:duration-0 duration-700" src="/img/cover3.png" width="200" height="400" alt="" />
 						<div className="group-hover/book:text-black my-2 font-bold text-[#b73d3d] uppercase">Year 3</div>
 					</Link>
-					<Link className="group/book" href="/466">
+					<Link className="group/book" href="/2009/08/18">
 						<Image className="group-hover/book:opacity-75 transition-opacity group-hover/book:duration-0 duration-700" src="/img/cover4.png" width="200" height="400" alt="" />
 						<div className="group-hover/book:text-black my-2 font-bold text-[#b73d3d] uppercase">Year 4</div>
 					</Link>
-					<Link className="group/book" href="/621">
+					<Link className="group/book" href="/2010/08/19">
 						<Image className="group-hover/book:opacity-75 transition-opacity group-hover/book:duration-0 duration-700" src="/img/cover5.png" width="200" height="400" alt="" />
 						<div className="group-hover/book:text-black my-2 font-bold text-[#b73d3d] uppercase">Year 5</div>
 					</Link>
