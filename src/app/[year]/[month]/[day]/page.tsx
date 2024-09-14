@@ -1,5 +1,33 @@
+import { Metadata, ResolvingMetadata } from "next"
 import Comic from "@ui/comic-component"
 import fs from "fs"
+
+/** ------------------------------------------------ **
+ * Metadata
+ ** ------------------------------------------------ **/
+
+export async function generateMetadata(
+	{ params, searchParams} : Props, parent: ResolvingMetadata
+): Promise<Metadata> {
+	// Get a list of all the comics in the comic images folder
+	const path = "public/comic/img"
+	const comics = fs.readdirSync(path)
+
+	const year = params.year
+	const month = params.month
+	const day = params.day
+
+	// Retrieve the current comic, with fallback on the homepage
+	const comicDate = year && month && day ? year + "-" + month + "-" + day : undefined
+	const comicIndex = comicDate ? comics.findIndex(comic => comic.includes(comicDate)) : -1
+	const thisComic = comicIndex == -1 ? comics[comics.length - 1] : comics[comicIndex]
+	const comicTitle = thisComic.substring(11)
+
+	console.log(comicTitle)
+	return {
+		title: "Title"
+	}
+}
 
 /** ------------------------------------------------ **
  * Comic Route
