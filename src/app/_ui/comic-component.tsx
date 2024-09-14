@@ -17,9 +17,9 @@ export default function Comic({
 	month,
 	day
 }: {
-	year: number,
-	month: number,
-	day: number
+	year?: number,
+	month?: number,
+	day?: number
 }) {
 
 	// Get a list of all the comics in the comic images folder
@@ -27,8 +27,8 @@ export default function Comic({
 	const comics = fs.readdirSync(path)
 
 	// Retrieve the current comic, with fallback on the homepage
-	const comicDate = year + "-" + month + "-" + day
-	const comicIndex = comics.findIndex(comic => comic.includes(comicDate))
+	const comicDate = year && month && day ? year + "-" + month + "-" + day : undefined
+	const comicIndex = comicDate ? comics.findIndex(comic => comic.includes(comicDate)) : -1
 	const thisComic = comicIndex == -1 ? comics[comics.length - 1] : comics[comicIndex]
 
 	// Comic Date Display
