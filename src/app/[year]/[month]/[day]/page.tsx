@@ -54,8 +54,8 @@ export function generateStaticParams() {
 		//page: title
 		// 2008-10-12
 		year: title.substring(0, 4),
-		month: title.substring(6, 7),
-		day: title.substring(9, 10)
+		month: title.substring(5, 7),
+		day: title.substring(8, 10)
 
 	}))
 
