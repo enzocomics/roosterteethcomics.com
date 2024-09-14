@@ -32,7 +32,7 @@ export default function Comic({
 	const thisComic = comicIndex == -1 ? comics[comics.length - 1] : comics[comicIndex]
 
 	// Comic Date Display
-	const comicDateFormatted = dayjs(comicDate).format("MMMM D, YYYY")
+	const comicDateFormatted = comicDate ? dayjs(comicDate).format("MMMM D, YYYY") : dayjs(comics[comics.length - 1].substring(0, 10).replaceAll("-", "/")).format("MMMM D, YYYY")
 
 	// Output
 	return <>
@@ -71,7 +71,7 @@ function ComicNav({
 	// Get a list of all the comics in the comic images folder
 	const path = "public/comic/img"
 	const comics = fs.readdirSync(path)
-	const pageNum = (index == -1 || index == undefined) ? comics.length : index
+	const pageNum = (index == -1 || index == undefined) ? comics.length - 1 : index
 
 	// Comic navigation buttons - grab links to the adjacent comics
 	const firstComic = pageNum > 0 ? "/" + comics[0].substring(0, 10).replaceAll("-", "/") : undefined
