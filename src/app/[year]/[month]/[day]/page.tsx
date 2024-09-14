@@ -7,7 +7,8 @@ import fs from "fs"
 export default function Page({
 	params
 }: {
-	params: { page: number }
+	//params: { page: number }
+	params: { year: number, month: number, day: number }
 }) {
 
 	// TODO: Check if the current page url is correct
@@ -15,7 +16,7 @@ export default function Page({
 	// - Throw 404 if it doesn't find a comic
 
 	return <>
-		<Comic page={params.page} />
+		<Comic year={params.year} month={params.month} day={params.day} />
 	</>
 }
 
@@ -28,6 +29,13 @@ export function generateStaticParams() {
 	// Get a list of all the comics in the comic images folder
 	const path = "public/comic/img"
 	const comics = fs.readdirSync(path)
+
+	// Loop through the array and changed the paths to just the dates
+	comics.forEach((comic, index) => {
+		// Only grab the first ten characters of the filename (the date)
+		let title = comic.substring(0, 10)
+		comics[index] = title
+	})
 
 	// Loop through the array and change the paths to just the names
 	// comics.forEach((comic, index) => {
@@ -42,7 +50,13 @@ export function generateStaticParams() {
 
 	// Generate a static segment for every comic 
 	return comics.map((title, index) => ({
-		page: (index + 1).toString()
+		//page: (index + 1).toString()
+		//page: title
+		// 2008-10-12
+		year: title.substring(0, 4),
+		month: title.substring(6, 7),
+		day: title.substring(9, 10)
+
 	}))
 
 }
