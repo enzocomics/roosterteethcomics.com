@@ -46,10 +46,6 @@ export default function Page({
 	params: { year: number, month: number, day: number }
 }) {
 
-	// TODO: Check if the current page url is correct
-	// - compare it to the list of comic images
-	// - Throw 404 if it doesn't find a comic
-
 	return <>
 		<Comic year={params.year} month={params.month} day={params.day} />
 	</>
@@ -72,22 +68,8 @@ export function generateStaticParams() {
 		comics[index] = title
 	})
 
-	// Loop through the array and change the paths to just the names
-	// comics.forEach((comic, index) => {
-	// 	// Format the title - remove the date, the filename, and hyphens
-	// 	// let title
-	// 	// title = comic.replace(/\d{2,4}[\-]\d{1,2}[\-]\d{1,2}[\-]/g, "")
-	// 	// title = title.replace(".jpg", "")
-	// 	// title = title.replace(".png", "")
-	// 	//title = title.replace("-", "")
-	// 	comics[index] = title
-	// })
-
 	// Generate a static segment for every comic 
 	return comics.map((title, index) => ({
-		//page: (index + 1).toString()
-		//page: title
-		// 2008_10_12
 		year: title.substring(0, 4),
 		month: title.substring(5, 7),
 		day: title.substring(8, 10)
