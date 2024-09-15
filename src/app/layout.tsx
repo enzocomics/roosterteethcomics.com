@@ -1,10 +1,48 @@
 /** ------------------------------------------------ **/
 // Styles
 import "@styles/global.css"
-import { copy, display } from '@styles/fonts'
+import { copy, display } from "@styles/fonts"
+// Next.js
+import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 
+/** ------------------------------------------------ **
+ * Global Metadata
+ ** ------------------------------------------------ **/
+
+export const metadata: Metadata = {
+	title: {
+		template: "%s | Rooster Teeth Comics",
+		default: "Rooster Teeth Comics"
+	},
+	description: "RoosterTeethComics.com is an archive of the series of webcomics about the staff at Rooster Teeth that ran from 2006 to 2011.",
+	keywords: ["Rooster Teeth", "comics", "webcomic"],
+	authors: [
+		{ name: "Griffon Ramsey", url: "https://www.instagram.com/griffonramsey" },
+		{ name: "Luke McKay", url: "https://lukemckay.com" },
+		{ name: "Geoff Ramsey", url: "https://www.instagram.com/geofflramsey" },
+	],
+	publisher: "Rooster Teeth Productions, LLC",
+	metadataBase: new URL("https://roosterteethcomics.com"),
+	openGraph: {
+		title: "Rooster Teeth Comics",
+		description: "RoosterTeethComics.com is an archive of the series of webcomics about the staff at Rooster Teeth that ran from 2006 to 2011.",
+		url: "https://roosterteethcomics.com",
+		siteName: "Rooster Teeth Comics",
+		images: [
+			{
+				url: "https://roosterteethcomics.com/img/cover1.png",
+				width: 240,
+				height: 301,
+				alt: "Rooster Teeth Comics"
+			}
+		],
+		locale: "en_US",
+		type: "website",
+	}
+
+}
 /** ------------------------------------------------ **
  * Root Layout 
  ** ------------------------------------------------ **/

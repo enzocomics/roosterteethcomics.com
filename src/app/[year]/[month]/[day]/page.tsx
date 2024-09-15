@@ -2,12 +2,20 @@ import { Metadata, ResolvingMetadata } from "next"
 import Comic from "@ui/comic-component"
 import fs from "fs"
 
+
 /** ------------------------------------------------ **
  * Metadata
  ** ------------------------------------------------ **/
 
-export async function generateMetadata(
-	{ params, searchParams} : Props, parent: ResolvingMetadata
+export async function generateMetadata({
+	params
+}: {
+	params: {
+		year: number,
+		month: number,
+		day: number
+	}
+}, parent: ResolvingMetadata
 ): Promise<Metadata> {
 	// Get a list of all the comics in the comic images folder
 	const path = "public/comic/img"
@@ -18,14 +26,13 @@ export async function generateMetadata(
 	const day = params.day
 
 	// Retrieve the current comic, with fallback on the homepage
-	const comicDate = year && month && day ? year + "-" + month + "-" + day : undefined
+	const comicDate = year && month && day ? year + "_" + month + "_" + day : undefined
 	const comicIndex = comicDate ? comics.findIndex(comic => comic.includes(comicDate)) : -1
 	const thisComic = comicIndex == -1 ? comics[comics.length - 1] : comics[comicIndex]
-	const comicTitle = thisComic.substring(11)
+	const comicTitle = thisComic.substring(11).slice(0, -4).replaceAll("_", " ")
 
-	console.log(comicTitle)
 	return {
-		title: "Title"
+		title: comicTitle
 	}
 }
 
@@ -80,7 +87,7 @@ export function generateStaticParams() {
 	return comics.map((title, index) => ({
 		//page: (index + 1).toString()
 		//page: title
-		// 2008-10-12
+		// 2008_10_12
 		year: title.substring(0, 4),
 		month: title.substring(5, 7),
 		day: title.substring(8, 10)

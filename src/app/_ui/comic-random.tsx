@@ -21,7 +21,7 @@ export default function RandomComicButton({
 
 			// Get a random comic index
 			const randomIndex = Math.floor(Math.random() * comics.length)
-			const randomComic = "/" + comics[randomIndex].substring(0, 10).replaceAll("-", "/")
+			const randomComic = "/" + comics[randomIndex].substring(0, 10).replaceAll("_", "/")
 			// Push to the link
 			router.push(randomComic)
 			//

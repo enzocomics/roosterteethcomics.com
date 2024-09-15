@@ -27,12 +27,12 @@ export default function Comic({
 	const comics = fs.readdirSync(path)
 
 	// Retrieve the current comic, with fallback on the homepage
-	const comicDate = year && month && day ? year + "-" + month + "-" + day : undefined
+	const comicDate = year && month && day ? year + "_" + month + "_" + day : undefined
 	const comicIndex = comicDate ? comics.findIndex(comic => comic.includes(comicDate)) : -1
 	const thisComic = comicIndex == -1 ? comics[comics.length - 1] : comics[comicIndex]
 
 	// Comic Date Display
-	const comicDateFormatted = comicDate ? dayjs(comicDate).format("MMMM D, YYYY") : dayjs(comics[comics.length - 1].substring(0, 10).replaceAll("-", "/")).format("MMMM D, YYYY")
+	const comicDateFormatted = year && month && day ? dayjs(year.toString() + month.toString() + day.toString()).format("MMMM D, YYYY") : dayjs(comics[comics.length - 1].substring(0, 10).replaceAll("_", "/")).format("MMMM D, YYYY")
 
 	// Output
 	return <>
@@ -74,10 +74,10 @@ function ComicNav({
 	const pageNum = (index == -1 || index == undefined) ? comics.length - 1 : index
 
 	// Comic navigation buttons - grab links to the adjacent comics
-	const firstComic = pageNum > 0 ? "/" + comics[0].substring(0, 10).replaceAll("-", "/") : undefined
-	const prevComic = pageNum > 0 ? "/" + comics[pageNum - 1].substring(0, 10).replaceAll("-", "/") : undefined
-	const nextComic = pageNum < comics.length - 1 ? "/" + comics[pageNum + 1].substring(0, 10).replaceAll("-", "/") : undefined
-	const lastComic = pageNum < comics.length - 1 ? "/" + comics[comics.length - 1].substring(0, 10).replaceAll("-", "/") : undefined
+	const firstComic = pageNum > 0 ? "/" + comics[0].substring(0, 10).replaceAll("_", "/") : undefined
+	const prevComic = pageNum > 0 ? "/" + comics[pageNum - 1].substring(0, 10).replaceAll("_", "/") : undefined
+	const nextComic = pageNum < comics.length - 1 ? "/" + comics[pageNum + 1].substring(0, 10).replaceAll("_", "/") : undefined
+	const lastComic = pageNum < comics.length - 1 ? "/" + comics[comics.length - 1].substring(0, 10).replaceAll("_", "/") : undefined
 
 	// Random comic button
 
