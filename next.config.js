@@ -1,8 +1,19 @@
 // @ts-check
 
-/** @type {import('next').NextConfig} */
+/**
+ * @type {import('next').NextConfig}
+ */
+
 const nextConfig = {
-	/* config options here */
+	async redirects() {
+		return [
+			{
+				source: "/comic/great-minds-sleep-alike",
+				destination: "/2008/12/18",
+				permanent: true,
+			},
+		];
+	},
 };
 
 module.exports = nextConfig;
