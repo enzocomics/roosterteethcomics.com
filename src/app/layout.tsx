@@ -6,8 +6,7 @@ import { copy, display } from "@styles/fonts"
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-// Vercel
-import { Analytics } from "@vercel/analytics/react"
+import Script from "next/script"
 
 
 /** ------------------------------------------------ **
@@ -55,6 +54,8 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode
 }) {
+	const analyticsID = process.env.NEXT_PUBLIC_ANALYTICS_ID!
+
 	return (
 		<html lang="en" className={`${copy.variable} ${display.variable} bg-[#f5f5f5]`}>
 			<body className="min-w-80">
@@ -110,7 +111,11 @@ export default function RootLayout({
 						<Image className="inline mx-1" alt="" src="/img/icon-github.svg" width="16" height="16" /> This site was built in a cave with a box of scraps
 					</Link>
 				</footer>
-				<Analytics />
+				<Script
+					strategy="beforeInteractive"
+					src="https://analytics.cuek.co/script.js"
+					data-website-id={analyticsID}
+				/>
 			</body>
 		</html>
 	)
