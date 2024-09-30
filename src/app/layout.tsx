@@ -54,6 +54,8 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode
 }) {
+	const analyticsID = process.env.NEXT_PUBLIC_ANALYTICS_ID!
+
 	return (
 		<html lang="en" className={`${copy.variable} ${display.variable} bg-[#f5f5f5]`}>
 			<body className="min-w-80">
@@ -112,7 +114,7 @@ export default function RootLayout({
 				<Script
 					strategy="beforeInteractive"
 					src="https://analytics.cuek.co/script.js"
-					data-website-id={process.env.NEXT_PUBLIC_ANALYTICS_ID}
+					data-website-id={analyticsID}
 				/>
 			</body>
 		</html>
