@@ -10,11 +10,11 @@ import fs from "fs"
 export async function generateMetadata({
 	params
 }: {
-	params: {
+	params: Promise<{
 		year: number,
 		month: number,
 		day: number
-	}
+	}>
 }, parent: ResolvingMetadata
 ): Promise<Metadata> {
 	// Get a list of all the comics in the comic images folder
@@ -44,7 +44,7 @@ export default async function Page({
 	params
 }: {
 	//params: { page: number }
-	params: { year: number, month: number, day: number }
+	params: Promise<{ year: number, month: number, day: number }>
 }) {
 
 	const { year, month, day } = await params
