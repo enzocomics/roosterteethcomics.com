@@ -10,20 +10,21 @@ import fs from "fs"
 export async function generateMetadata({
 	params
 }: {
-	params: {
+	params: Promise<{
 		year: number,
 		month: number,
 		day: number
-	}
+	}>
 }, parent: ResolvingMetadata
 ): Promise<Metadata> {
 	// Get a list of all the comics in the comic images folder
 	const path = "public/comic/img"
 	const comics = fs.readdirSync(path)
 
-	const year = params.year
-	const month = params.month
-	const day = params.day
+	const { year, month, day } = await params
+	// const year = params.year
+	// const month = params.month
+	// const day = params.day
 
 	// Retrieve the current comic, with fallback on the homepage
 	const comicDate = year && month && day ? year + "_" + month + "_" + day : undefined
@@ -39,15 +40,18 @@ export async function generateMetadata({
 /** ------------------------------------------------ **
  * Comic Route
  ** ------------------------------------------------ **/
-export default function Page({
+export default async function Page({
 	params
 }: {
 	//params: { page: number }
-	params: { year: number, month: number, day: number }
+	params: Promise<{ year: number, month: number, day: number }>
 }) {
 
+	const { year, month, day } = await params
+
+
 	return <>
-		<Comic year={params.year} month={params.month} day={params.day} />
+		<Comic year={year} month={month} day={day} />
 	</>
 }
 
